@@ -14,5 +14,8 @@
     <input type="text" th:field="*{eMail}" id="eMail" placeholder="eMail">
     <input type="submit" value="Create User">
 </form>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>

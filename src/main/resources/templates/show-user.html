@@ -18,6 +18,8 @@
     <td th:utext="${user.eMail}">eMail</td>
 </table>
 <br>
-<button class="buttonLogout" onclick="window.location.href = '/logout';">Logout</button>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>
