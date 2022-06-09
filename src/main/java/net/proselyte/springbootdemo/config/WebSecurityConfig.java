@@ -23,18 +23,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                     .authorizeRequests()
-
                     //Доступ разрешен всем пользователей
                     .antMatchers("/").permitAll()
-
                     //Все остальные страницы требуют аутентификации
                     .anyRequest().authenticated()
-
                 .and()
-
                     //Настройка для входа в систему
                     .formLogin()
-
                     //Перенарпавление на страницы после успешного входа согласно successUserHandler
                     .successHandler(successUserHandler)
                     .permitAll()

@@ -15,6 +15,7 @@
                 <th>Id</th>
                 <th>First name</th>
                 <th>Last name</th>
+                <th>eMail</th>
             </tr>
             </thead>
             <tbody>
@@ -22,6 +23,7 @@
                 <td th:text="${user.id}"></td>
                 <td th:text="${user.firstName}"></td>
                 <td th:text="${user.lastName}"></td>
+                <td th:text="${user.eMail}"></td>
                 <td><a th:href="@{/admin/user-update/{id}(id=${user.id})}">Edit</a></td>
                 <td><a th:href="@{/admin/user-delete/{id}(id=${user.id})}">Delete</a></td>
                 <td><a th:href="@{/admin/user-show/{id}(id=${user.id})}">Show</a></td>
