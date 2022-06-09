@@ -39,7 +39,7 @@ public class AdminController {
 
 
     @GetMapping ("/admin/user-delete/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
+    public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return "redirect:/admin";
     }
@@ -47,7 +47,7 @@ public class AdminController {
 
 
     @GetMapping("/admin/user-update/{id}")
-    public String updateUserForm(@PathVariable("id") int id, Model model) {
+    public String updateUserForm(@PathVariable("id") Long id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("user", user);
         return "user-update";
@@ -59,7 +59,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/user-show/{id}")
-    public String userShow(@PathVariable("id") int id, Model model) {
+    public String userShow(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "show-user";
     }
