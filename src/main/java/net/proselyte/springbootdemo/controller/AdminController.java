@@ -11,19 +11,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping()
 public class AdminController {
 
-    private UserService userService;
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
 
     @GetMapping("/admin")
     public String userList(Model model) {
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", userService.allUsers());
         return "user-list";
     }
-
-
 
     @GetMapping("/admin/user-create")
     public String createUserForm(User user) {
@@ -35,20 +30,15 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-
-
-
     @GetMapping ("/admin/user-delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
-        userService.deleteById(id);
+        userService.deleteUser(id);
         return "redirect:/admin";
     }
 
-
-
     @GetMapping("/admin/user-update/{id}")
     public String updateUserForm(@PathVariable("id") Long id, Model model) {
-        User user = userService.findById(id);
+        User user = userService.findUserById(id);
         model.addAttribute("user", user);
         return "user-update";
     }
@@ -60,7 +50,7 @@ public class AdminController {
 
     @GetMapping("/admin/user-show/{id}")
     public String userShow(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.findById(id));
+        model.addAttribute("user", userService.findUserById(id));
         return "show-user";
     }
 }

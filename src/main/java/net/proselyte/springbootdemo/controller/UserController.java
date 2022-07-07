@@ -23,12 +23,13 @@ public class UserController {
 
     @GetMapping("/")
     public String greeting() {
-        return "greeting";
+//        return "greeting";
+        return "redirect:/login";
     }
 
     @GetMapping("/users")
     public String findAll(Model model) {
-        List<User> users = userService.findAll();
+        List<User> users = userService.allUsers();
         model.addAttribute("users", users);
         return "user-list";
     }
@@ -46,13 +47,13 @@ public class UserController {
 
     @GetMapping("/user-delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
-        userService.deleteById(id);
+        userService.deleteUser(id);
         return "redirect:/users";
     }
 
     @GetMapping("/user-update/{id}")
     public String updateUserForm(@PathVariable("id") Long id, Model model) {
-        User user = userService.findById(id);
+        User user = userService.findUserById(id);
         model.addAttribute("user", user);
         return "user-update";
     }
