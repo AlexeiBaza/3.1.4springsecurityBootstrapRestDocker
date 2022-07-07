@@ -1,7 +1,7 @@
 package net.proselyte.springbootdemo.controller;
 
 import net.proselyte.springbootdemo.model.User;
-import net.proselyte.springbootdemo.service.UserService;
+import net.proselyte.springbootdemo.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +14,11 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserServiceImpl userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
     }
 
     @GetMapping("/")
@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/users")
     public String findAll(Model model) {
-        List<User> users = userService.allUsers();
+        List<User> users = userServiceImpl.allUsers();
         model.addAttribute("users", users);
         return "user-list";
     }
@@ -41,26 +41,26 @@ public class UserController {
 
     @PostMapping("/user-create")
     public String createUser(User user) {
-        userService.saveUser(user);
+        userServiceImpl.saveUser(user);
         return "redirect:/users";
     }
 
     @GetMapping("/user-delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
+        userServiceImpl.deleteUser(id);
         return "redirect:/users";
     }
 
     @GetMapping("/user-update/{id}")
     public String updateUserForm(@PathVariable("id") Long id, Model model) {
-        User user = userService.findUserById(id);
+        User user = userServiceImpl.findUserById(id);
         model.addAttribute("user", user);
         return "user-update";
     }
 
     @PostMapping("/user-update")
     public String updateUser(User user) {
-        userService.saveUser(user);//метод save сам определяет обговление или создание новой сущности
+        userServiceImpl.saveUser(user);//метод save сам определяет обговление или создание новой сущности
         return "redirect:/users";
     }
 }
