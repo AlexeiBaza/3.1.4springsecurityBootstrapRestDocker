@@ -1,41 +1,39 @@
 package net.proselyte.springbootdemo.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "t_role",
         uniqueConstraints = {
-                @UniqueConstraint(name = "role_name_unique", columnNames = "role_name")
+                @UniqueConstraint(name = "role_name_unique",
+                        columnNames = "role_name")
         })
 public class Role implements GrantedAuthority {
+
     @Id
-    private Long id;
-    private String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id",
+            updatable = false)
+    private long id;
 
-    @Transient
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    @Column(name = "role_name",
+            nullable = false)
+    private String roleName;
 
-
-    public Role(Long id) {
-        this.id = id;
+    public Role(String roleName) {
+        this.roleName = roleName;
     }
 
-    public Role(Long id, String role) {
-        this.id = id;
-        this.name = role;
-    }
-
-    //возвращает имя роли
     @Override
     public String getAuthority() {
-        return getName();
+        return roleName;
     }
 }

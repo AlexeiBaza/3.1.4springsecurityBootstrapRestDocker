@@ -1,5 +1,6 @@
 package net.proselyte.springbootdemo.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -11,11 +12,16 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-@ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "t_user")
+@Table(name = "t_user",
+uniqueConstraints = {
+        @UniqueConstraint(name = "user_email_unique",
+        columnNames = "email")
+})
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",
@@ -29,7 +35,7 @@ public class User implements UserDetails {
     private String lastName;
 
     @Column(name = "email")
-    private String eMail;
+    private String email;
 
     @Column(name = "password")
     private String password;
@@ -49,7 +55,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return firstName;
+        return email;
     }
     @Override
     public boolean isAccountNonExpired() {

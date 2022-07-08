@@ -18,19 +18,18 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleService roleService, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleService roleService) {
         this.userRepository = userRepository;
         this.roleService = roleService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void create(User user, String[] roles) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(user.getPassword());
         user.setRoles(Arrays.stream(roles)
                 .map(role ->roleService.findByRoleName(role).get())
                 .collect(Collectors.toList()));
@@ -42,7 +41,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (user.getPassword().isEmpty()) {
             user.setPassword(userRepository.findById(user.getId()).get().getPassword());
         } else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+//            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setPassword(user.getPassword());
         }
 
         if (roles != null) {
