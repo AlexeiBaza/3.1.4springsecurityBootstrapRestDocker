@@ -27,7 +27,7 @@ public class UserController {
 //        return "redirect:/login";
     }
 
-    @GetMapping("/user/**")
+    @GetMapping("/user")
     public String findAll(Model model) {
         List<User> users = userService.readAll();
         model.addAttribute("users", users);

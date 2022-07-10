@@ -34,6 +34,8 @@ public class SpringbootdemoApplication {
 		user.setPassword(user.getPassword());
 //		String user = userRepository.findByEmail("admin").toString();
 		System.out.println(user);
+
+		System.out.println(userRepository.findAll());
 	}
 
 }

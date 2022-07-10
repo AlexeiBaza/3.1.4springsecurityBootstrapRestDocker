@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All users</title>
+</head>
+<body>
+<h2>Users Table</h2>
+
+<table border="1">
+    <tr bgcolor="#d3d3d3">
+        <th width="30"> Id </th>
+        <th> ID </th>
+        <th> First Name </th>
+        <th> LastName </th>
+        <th> Email </th>
+        <th> Password </th>
+        <th> </th>
+        <th> </th>
+    </tr>
+
+    <tr th:each="user : ${users}" align="center">
+        <td th:text="${user.getId()}">Id</td>
+        <td th:text="${user.getFirstName()}">FirstName</td>
+        <td th:text="${user.getLastName()}">LastName</td>
+        <td th:text="${user.getEmail()}">Email</td>
+        <td th:text="${user.getPassword()}">Password</td>
+        <td> <a th:href="@{/admin/users/{id}/edit(id=${user.getId()})}"> Edit</a></td>
+
+        <td>
+            <form th:method="POST"
+                  th:action="@{/admin/users/{id}/delete(id=${user.getId()})}">
+                <input type="submit" value="Delete">
+            </form>
+        </td>
+
+    </tr>
+</table>
+
+<br>
+<a href="/admin/users/new">Add new user</a>
+
+<p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
 </head>
 <body>
+<h2>Все пользователи</h2>
 <div th:switch="${users}">
     <h2 th:case="null">No users found!</h2>
     <div th:case="*">
@@ -15,15 +67,17 @@
                 <th>Id</th>
                 <th>First name</th>
                 <th>Last name</th>
-                <th>eMail</th>
+                <th>Email</th>
+                <th>Password</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user : ${users}">
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.lastName}"></td>
-                <td th:text="${user.eMail}"></td>
+                <td th:text="${user.getid}"></td>
+                <td th:text="${user.getFirstName}"></td>
+                <td th:text="${user.getLastName}"></td>
+                <td th:text="${user.getEmail}"></td>
+                <td th:text="${user.getPassword}"></td>
                 <td><a th:href="@{/admin/user-update/{id}(id=${user.id})}">Edit</a></td>
                 <td><a th:href="@{/admin/user-delete/{id}(id=${user.id})}">Delete</a></td>
                 <td><a th:href="@{/admin/user-show/{id}(id=${user.id})}">Show</a></td>
@@ -38,3 +92,4 @@
 </form>
 </body>
 </html>
+-->
