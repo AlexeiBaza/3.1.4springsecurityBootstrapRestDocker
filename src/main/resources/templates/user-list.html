@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>All users</title>
@@ -8,13 +8,16 @@
 <h2>Users Table</h2>
 
 <table border="1">
-    <tr bgcolor="#d3d3d3">
-        <th width="30"> Id </th>
-        <th> ID </th>
-        <th> First Name </th>
+    <tr>
+        <th> Id </th>
+        <th> FirstName </th>
         <th> LastName </th>
         <th> Email </th>
         <th> Password </th>
+        <th> Role </th>
+        <th> Edit user </th>
+        <th> Delete user </th>
+        <th> Show user </th>
         <th> </th>
         <th> </th>
     </tr>
@@ -25,15 +28,10 @@
         <td th:text="${user.getLastName()}">LastName</td>
         <td th:text="${user.getEmail()}">Email</td>
         <td th:text="${user.getPassword()}">Password</td>
-        <td> <a th:href="@{/admin/users/{id}/edit(id=${user.getId()})}"> Edit</a></td>
-
-        <td>
-            <form th:method="POST"
-                  th:action="@{/admin/users/{id}/delete(id=${user.getId()})}">
-                <input type="submit" value="Delete">
-            </form>
-        </td>
-
+        <td th:text="${user.getAuthorities().iterator().next().getAuthority()}">Role</td>
+        <td><a th:href="@{/admin/user-update/{id}(id=${user.getId()})}">Edit</a></td>
+        <td><a th:href="@{/admin/user-delete/{id}(id=${user.id})}">Delete</a></td>
+        <td><a th:href="@{/admin/user-show/{id}(id=${user.id})}">Show</a></td>
     </tr>
 </table>
 

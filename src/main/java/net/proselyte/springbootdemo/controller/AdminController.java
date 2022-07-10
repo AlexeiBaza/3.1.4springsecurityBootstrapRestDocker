@@ -25,6 +25,27 @@ public class AdminController {
         return "user-list";
     }
 
+    @GetMapping("/admin/user-update/{id}")
+    public String updateUserForm(@PathVariable("id") Long id, Model model) {
+        User user = userService.readById(id).get();
+        model.addAttribute("user", user);
+        return "user-update";
+    }
+    @PostMapping("/admin/user-update")
+    public String updateUser(@ModelAttribute("user") User user,
+                             @RequestParam(value = "userRoles", required = false) String[] roles) {
+        userService.update(user, roles);
+        return "redirect:/admin";
+    }
+
+
+
+
+
+
+
+
+
     @GetMapping("/admin/user-create")
     public String createUserForm(User user) {
         return "user-create";
@@ -43,18 +64,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/admin/user-update/{id}")
-    public String updateUserForm(@PathVariable("id") Long id, Model model) {
-        User user = userService.readById(id).get();
-        model.addAttribute("user", user);
-        return "user-update";
-    }
-    @PostMapping("/admin/user-update")
-    public String updateUser(@ModelAttribute("user") User user,
-                             @RequestParam(value = "userRoles", required = false) String[] roles) {
-        userService.update(user, roles);
-        return "redirect:/admin";
-    }
+
 
     @GetMapping("/admin/user-show/{id}")
     public String userShow(@PathVariable("id") Long id, Model model) {

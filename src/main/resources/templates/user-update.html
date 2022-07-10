@@ -1,25 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Update user</title>
 </head>
 <body>
 <form action="#" th:action="@{/admin/user-update}" th:object="${user}" method="post">
-    <label for="id">ID</label>
-    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
-    <br/>
-    <label for="firstName">First name</label>
-    <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name">
-    <br/>
-    <label for="lastName">Last name</label>
-    <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name">
-    <br/>
-    <label for="eMail">eMail</label>
-    <input type="text" th:field="*{eMail}" id="eMail" placeholder="eMail">
-    <br/>
+<!--    <br>-->
+<!--    <label for="id">Id</label>-->
+<!--    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">-->
+<!--    <br/>-->
+
+    <br>
+    <span>Id</span>
+    <input readonly type="number"
+           th:field="*{id}"
+    />
+
+    <br>
+    <span>Enter new first name</span>
+    <input type="text"
+           th:field="*{firstName}"
+    />
+
+    <br>
+    <span>Enter new last name</span>
+    <input type="text"
+           th:field="*{lastName}"
+    />
+
+    <br>
+    <span>Enter new email</span>
+    <input type="email"
+           th:field="*{email}"
+    />
+
+    <br>
+    <span>Enter new password</span>
+    <input type="text"
+           th:field="*{password}"
+    />
+
+    <br>
+    <span > Change role </span>
+    <select size="2"
+            name="userRoles"
+            multiple>
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
+    </select>
+
     <input type="submit" value="Update User">
 </form>
+
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
