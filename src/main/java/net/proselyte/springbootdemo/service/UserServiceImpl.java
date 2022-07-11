@@ -24,13 +24,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         this.roleService = roleService;
     }
 
+//    @Override
+//    public void create(User user, String[] roles) {
+////        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setPassword(user.getPassword());
+//        user.setRoles(Arrays.stream(roles)
+//                .map(role ->roleService.findByRoleName(role).get())
+//                .collect(Collectors.toList()));
+//        userRepository.save(user);
+//    }
+
     @Override
-    public void create(User user, String[] roles) {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public void create(User user) {
         user.setPassword(user.getPassword());
-        user.setRoles(Arrays.stream(roles)
-                .map(role ->roleService.findByRoleName(role).get())
-                .collect(Collectors.toList()));
         userRepository.save(user);
     }
 

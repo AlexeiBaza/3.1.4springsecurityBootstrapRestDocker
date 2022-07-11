@@ -23,8 +23,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",
-            updatable = false)
+    @Column(name = "id", updatable = false)
     private Long id;
 
     @Column(name = "first_name")
@@ -41,6 +40,7 @@ public class User implements UserDetails {
 
     @ManyToMany(cascade = CascadeType.MERGE,
             fetch = FetchType.EAGER)
+
     @JoinTable(name = "user_roles",
     joinColumns = @JoinColumn(name = "id_user"),
     inverseJoinColumns = @JoinColumn(name = "id_role"))
