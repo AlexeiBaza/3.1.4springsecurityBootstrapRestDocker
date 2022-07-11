@@ -1,23 +1,21 @@
 package net.proselyte.springbootdemo.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final SuccessUserHandler successUserHandler;
+    private final AuthenticationSuccessHandler successHandler;
 
-    public WebSecurityConfig(SuccessUserHandler successUserHandler) {
-        this.successUserHandler = successUserHandler;
+    public WebSecurityConfig(AuthenticationSuccessHandler successHandler) {
+        this.successHandler = successHandler;
     }
 
     @SuppressWarnings("deprecation")
@@ -35,13 +33,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
-//                .antMatchers("/**").hasRole("ADMIN")
-//                .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+//                    .antMatchers("/admin/**").access("hasRole('ADMIN')")
+//                    .antMatchers("/user/**").access("hasAnyRole('ADMIN','USER')")
                 .anyRequest().permitAll()
+//                    .authenticated()
                 .and().formLogin()
-                .permitAll()
-                .successHandler(successUserHandler)
+                    .permitAll()
+                .successHandler(successHandler)
                 .and()
                 .logout()
                 .permitAll();
