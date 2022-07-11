@@ -6,12 +6,11 @@
 </head>
 <body>
 <h2>Users Table</h2>
-
-<table border="1">
+<table>
     <tr>
         <th> Id </th>
-        <th> FirstName </th>
-        <th> LastName </th>
+        <th> First name </th>
+        <th> Last name </th>
         <th> Email </th>
         <th> Password </th>
         <th> Role </th>
@@ -30,8 +29,8 @@
         <td th:text="${user.getPassword()}">Password</td>
         <td th:text="${user.getAuthorities().iterator().next().getAuthority()}">Role</td>
         <td><a th:href="@{/admin/user-update/{id}(id=${user.getId()})}">Edit</a></td>
-        <td><a th:href="@{/admin/user-delete/{id}(id=${user.id})}">Delete</a></td>
-        <td><a th:href="@{/admin/user-show/{id}(id=${user.id})}">Show</a></td>
+        <td><a th:href="@{/admin/user-delete/{id}(id=${user.getId()})}">Delete</a></td>
+        <td><a th:href="@{/admin/user-show/{id}(id=${user.getId()})}">Show</a></td>
     </tr>
 </table>
 

@@ -38,6 +38,17 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    @GetMapping ("/admin/user-delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        userService.delete(userService.readById(id).get());
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/admin/user-show/{id}")
+    public String userShow(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("user", userService.readById(id));
+        return "show-user";
+    }
 
 
 
@@ -58,17 +69,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping ("/admin/user-delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        userService.delete(userService.readById(id).get());
-        return "redirect:/admin";
-    }
 
 
 
-    @GetMapping("/admin/user-show/{id}")
-    public String userShow(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.readById(id));
-        return "show-user";
-    }
+
+
 }

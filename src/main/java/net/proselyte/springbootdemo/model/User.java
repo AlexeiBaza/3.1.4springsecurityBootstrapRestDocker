@@ -33,7 +33,7 @@ public class User implements UserDetails {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", updatable = false)
     private String email;
 
     @Column(name = "password")

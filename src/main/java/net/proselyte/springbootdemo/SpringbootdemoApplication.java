@@ -35,7 +35,7 @@ public class SpringbootdemoApplication {
 //		String user = userRepository.findByEmail("admin").toString();
 		System.out.println(user);
 
-		System.out.println(userRepository.findByEmail("admin").getAuthorities().iterator().next().getAuthority());
+		System.out.println(userRepository.findById(1L).get().getId());
 	}
 
 }
