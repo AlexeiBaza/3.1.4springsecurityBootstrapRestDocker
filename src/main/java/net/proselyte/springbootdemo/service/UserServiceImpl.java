@@ -24,16 +24,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         this.roleService = roleService;
     }
 
-//    @Override
-//    public void create(User user, String[] roles) {
-////        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        user.setPassword(user.getPassword());
-//        user.setRoles(Arrays.stream(roles)
-//                .map(role ->roleService.findByRoleName(role).get())
-//                .collect(Collectors.toList()));
-//        userRepository.save(user);
-//    }
-
     @Override
     public void create(User user) {
         user.setPassword(user.getPassword());
@@ -41,21 +31,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void update(User user, String[] roles) {
-        if (user.getPassword().isEmpty()) {
-            user.setPassword(userRepository.findById(user.getId()).get().getPassword());
-        } else {
-//            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setPassword(user.getPassword());
-        }
-
-        if (roles != null) {
-            user.setRoles(Arrays.stream(roles)
-                    .map(role ->roleService.findByRoleName(role).get())
-                    .collect(Collectors.toList()));
-        } else {
-            user.setRoles(userRepository.findById(user.getId()).get().getRoles());
-        }
+    public void update(User user) {
         userRepository.save(user);
     }
 

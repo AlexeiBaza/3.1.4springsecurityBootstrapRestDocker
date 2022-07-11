@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>All users</title>
 </head>
 <body>
 <h2>Users Table</h2>
-<table>
+<table border="1">
     <tr>
         <th> Id </th>
         <th> First name </th>
@@ -20,7 +20,6 @@
         <th> </th>
         <th> </th>
     </tr>
-
     <tr th:each="user : ${users}" align="center">
         <td th:text="${user.getId()}">Id</td>
         <td th:text="${user.getFirstName()}">FirstName</td>
@@ -33,8 +32,6 @@
         <td><a th:href="@{/admin/user-show/{id}(id=${user.getId()})}">Show</a></td>
     </tr>
 </table>
-
-<br>
 <a href="/admin/user-create">Add new user</a>
 
 <p>

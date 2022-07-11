@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Update user</title>
 </head>
+
 <body>
-<form action="#" th:action="@{/admin/user-update}" th:object="${user}" method="post">
-<!--    <br>-->
-<!--    <label for="id">Id</label>-->
-<!--    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">-->
-<!--    <br/>-->
+<form th:method="POST"
+      th:action="@{/admin/user-update/{id}(id=${user.getId()})}"
+      th:object="${user}">
 
     <br>
     <span>Id</span>
@@ -20,41 +19,39 @@
     <br>
     <span>Enter new first name</span>
     <input type="text"
-           th:field="*{firstName}"
-    />
+           th:field="*{firstName}"/>
 
     <br>
     <span>Enter new last name</span>
     <input type="text"
-           th:field="*{lastName}"
-    />
+           th:field="*{lastName}"/>
 
     <br>
     <span>Enter new email</span>
-    <input type="email"
-           th:field="*{email}"
-    />
+    <input type="text"
+           th:field="*{email}"/>
 
     <br>
     <span>Enter new password</span>
     <input type="text"
-           th:field="*{password}"
-    />
+           th:field="*{password}"/>
 
-    <br>
     <span > Change role </span>
     <select size="2"
             name="userRoles"
             multiple>
-        <option value="Admin">Admin</option>
-        <option value="User">User</option>
+        <option value="ADMIN">ADMIN</option>
+        <option value="USER">USER</option>
     </select>
 
-    <input type="submit" value="Update User">
+    <p>
+    <input type="submit"
+           value="Update User"/>
 </form>
 
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
+
 </body>
 </html>

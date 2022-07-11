@@ -9,6 +9,6 @@ public interface UserService {
     void create(User user);
     Optional<User> readById(long id);
     List<User> readAll();
-    void update(User user, String[] roles);
+    void update(User user);
     void delete (User user);
 }

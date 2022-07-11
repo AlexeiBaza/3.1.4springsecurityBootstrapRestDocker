@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Create user</title>
@@ -8,17 +8,26 @@
 <form th:method="POST"
       th:action="@{/admin/user-create}"
       th:object="${user}">
-    <label for="firstName">Enter first name</label>
-    <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name">
 
-    <label for="lastName">Enter last name</label>
-    <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name">
+    <br>
+    <span> Enter first name</span>
+    <input type="text" th:field="*{firstName}" required
+    />
 
-    <label for="eMail">Enter email</label>
-    <input type="text" th:field="*{email}" id="eMail" placeholder="Email">
+    <br>
+    <span> Enter last name</span>
+    <input type="text" th:field="*{lastName}" required
+    />
 
-    <label for="password">Enter password</label>
-    <input type="text" th:field="*{password}" id="password" placeholder="Password">
+    <br>
+    <span> Enter email</span>
+    <input type="text" th:field="*{email}" required
+    />
+
+    <br>
+    <span> Enter password</span>
+    <input type="text" th:field="*{password}" required
+    />
 
     <br>
     <span>Select role</span>
@@ -27,7 +36,9 @@
         <option value="USER">User</option>
     </select>
 
+
     <input type="submit" value="Create User">
+
 </form>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
