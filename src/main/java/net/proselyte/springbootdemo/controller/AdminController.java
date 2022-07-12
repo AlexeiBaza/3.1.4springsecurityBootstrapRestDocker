@@ -23,7 +23,7 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping(path = "/admin")
+    @GetMapping(path = "/adminPage")
     public String userList(Model model) {
         model.addAttribute("users",
                 userService.readAll());
@@ -51,13 +51,13 @@ public class AdminController {
         }
         user.setRoles(list);
         userService.create(user);
-        return "redirect:/admin";
+        return "redirect:/adminPage";
     }
 
     @GetMapping (path = "/admin/user-delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.delete(userService.readById(id).get());
-        return "redirect:/admin";
+        return "redirect:/adminPage";
     }
 
     @GetMapping(path = "/admin/user-show/{id}")
@@ -100,6 +100,6 @@ public class AdminController {
             user.setPassword(request.getParameter("password"));
             userService.update(user);
         }
-        return "redirect:/admin";
+        return "redirect:/adminPage";
     }
 }
