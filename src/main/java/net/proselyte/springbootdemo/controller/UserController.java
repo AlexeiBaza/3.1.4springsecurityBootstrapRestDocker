@@ -25,7 +25,7 @@ public class UserController {
         this.roleService = roleService;
     }
 
-    @GetMapping(path = "/userPage")
+    @GetMapping("/user/userPage")
     public String getUser(Model model, Principal principal) {
         Optional<User> userOptional = Optional.of((User) ((Authentication) principal).getPrincipal());
         model.addAttribute("user", userOptional);

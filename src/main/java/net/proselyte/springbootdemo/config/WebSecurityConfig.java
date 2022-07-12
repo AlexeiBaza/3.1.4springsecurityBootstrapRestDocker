@@ -12,38 +12,48 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final AuthenticationSuccessHandler successHandler;
-
-    public WebSecurityConfig(AuthenticationSuccessHandler successHandler) {
-        this.successHandler = successHandler;
-    }
-
     @SuppressWarnings("deprecation")
     @Bean
     public static NoOpPasswordEncoder passwordEncoder() {
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 
+    private final AuthenticationSuccessHandler successHandler;
+
+    public WebSecurityConfig(AuthenticationSuccessHandler successHandler) {
+        this.successHandler = successHandler;
+    }
+
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .csrf()
+                    .disable()
+                .authorizeRequests()
+//                    .antMatchers("user-list.html").hasRole("ADMIN")
+//                    .antMatchers("userPage.html").hasRole("USER")
+                    .antMatchers("/admin/").hasRole("ADMIN")
+                    .antMatchers("/user/").hasRole("USER")
+                .anyRequest()
+                    .authenticated()
+                .and()
+                    .formLogin().permitAll()
+                    .successHandler(successHandler)
+                .and()
+                .logout()
+                    .permitAll();
+    }
+}
+
+
+
 //    @Bean
 //    public PasswordEncoder passwordEncoder() {
 //        return new BCryptPasswordEncoder(5);
 //    }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-//                    .antMatchers("/adminPage").access("hasRole('ADMIN')")
-//                    .antMatchers("/user/**").access("hasAnyRole('ADMIN','USER')")
-                .anyRequest().permitAll()
-                .and().formLogin()
-                    .permitAll()
-                .successHandler(successHandler)
-                .and()
-                .logout()
-                .permitAll();
-    }
-}
+
+
 
 //@Configuration
 //@EnableWebSecurity
