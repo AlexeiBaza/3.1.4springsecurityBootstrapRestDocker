@@ -11,23 +11,28 @@
       th:object="${user}">
 
     <br>
-    <span>Id</span>
+    <span>ID</span>
     <input readonly type="number"
            th:field="*{id}"
     />
 
     <br>
-    <span>Enter new first name</span>
+    <span>First name</span>
     <input type="text"
            th:field="*{firstName}"/>
 
     <br>
-    <span>Enter new last name</span>
+    <span>Last name</span>
     <input type="text"
            th:field="*{lastName}"/>
 
     <br>
-    <span>Enter new email</span>
+    <span>Age</span>
+    <input type="text"
+           th:field="*{age}"/>
+
+    <br>
+    <span>Email</span>
     <input type="text"
            th:field="*{email}"/>
 

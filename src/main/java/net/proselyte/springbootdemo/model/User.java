@@ -32,7 +32,10 @@ public class User implements UserDetails {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "age")
+    private Integer age;
+
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")

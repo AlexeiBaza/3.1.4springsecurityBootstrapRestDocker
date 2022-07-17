@@ -25,6 +25,11 @@ public class UserController {
         this.roleService = roleService;
     }
 
+    @GetMapping("/")
+    public String greeting() {
+        return "greeting.html";
+    }
+
     @GetMapping("/user/userPage")
     public String getUser(Model model, Principal principal) {
         Optional<User> userOptional = Optional.of((User) ((Authentication) principal).getPrincipal());

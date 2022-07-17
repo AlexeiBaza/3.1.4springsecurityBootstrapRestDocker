@@ -24,17 +24,17 @@ public class SpringbootdemoApplication {
 		SpringApplication.run(SpringbootdemoApplication.class, args);
 	}
 
-	@EventListener(ApplicationReadyEvent.class)
-	public void test() {
-		List<Role> roles1 = new ArrayList<>();
-		roles1.add(new Role(3L, "p"));
-		User user = new User(3L, "p", "p", "p", "p", roles1);
-//		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setPassword(user.getPassword());
-//		String user = userRepository.findByEmail("admin").toString();
-		System.out.println(user);
-
-		System.out.println(userRepository.findById(1L).get().getId());
-	}
+//	@EventListener(ApplicationReadyEvent.class)
+//	public void test() {
+//		List<Role> roles1 = new ArrayList<>();
+//		roles1.add(new Role(3L, "p"));
+//		User user = new User(3L, "p", "p", "p", "p", roles1);
+////		user.setPassword(passwordEncoder.encode(user.getPassword()));
+//		user.setPassword(user.getPassword());
+////		String user = userRepository.findByEmail("admin").toString();
+//		System.out.println(user);
+//
+//		System.out.println(userRepository.findById(1L).get().getId());
+//	}
 
 }
