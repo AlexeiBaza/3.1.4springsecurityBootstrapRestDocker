@@ -4,11 +4,13 @@ import net.proselyte.springbootdemo.model.Role;
 import net.proselyte.springbootdemo.model.User;
 import net.proselyte.springbootdemo.service.RoleService;
 import net.proselyte.springbootdemo.service.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +26,9 @@ public class AdminController {
     }
 
     @GetMapping(path = "/admin/adminPage")
-    public String userList(Model model) {
-        model.addAttribute("users",
-                userService.readAll());
+    public String userList(Model model, Principal principal) {
+        model.addAttribute("users", userService.readAll());
+        model.addAttribute("loggedInUser", (User) ((Authentication) principal).getPrincipal());
         return "user-list.html";
     }
 
