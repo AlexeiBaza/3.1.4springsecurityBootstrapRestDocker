@@ -27,14 +27,13 @@ public class SpringbootdemoApplication {
 //	@EventListener(ApplicationReadyEvent.class)
 //	public void test() {
 //		List<Role> roles1 = new ArrayList<>();
-//		roles1.add(new Role(3L, "p"));
-//		User user = new User(3L, "p", "p", "p", "p", roles1);
+//		roles1.add(new Role(3L, "admin"));
+//		roles1.add(new Role(3L, "user"));
+//		User user = new User(3L, "p", "p", 100, "p", "p", roles1);
 ////		user.setPassword(passwordEncoder.encode(user.getPassword()));
 //		user.setPassword(user.getPassword());
 ////		String user = userRepository.findByEmail("admin").toString();
-//		System.out.println(user);
-//
-//		System.out.println(userRepository.findById(1L).get().getId());
+//		System.out.println(userRepository.findById(1L).get().getAuthorities().iterator().next().getAuthority());
 //	}
 
 }
