@@ -41,7 +41,7 @@
             <div class="tab-content" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-admin" role="tabpanel" aria-labelledby="v-pills-admin-tab">
                     <h1>Admin panel</h1>
-<!--                    ПАНЕЛЬ НАВИГАЦИИ USER TABLE и NEW USER-->
+                    <!--                    ПАНЕЛЬ НАВИГАЦИИ USER TABLE и NEW USER-->
                     <nav class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-link active" id="nav-usersTable-tab" data-bs-toggle="tab" href="#nav-usersTable" role="tab" aria-controls="nav-usersTable" aria-selected="true">
                             Users table
@@ -56,69 +56,75 @@
                             <h4>All users</h4>
                             <table class="table table-striped" style="background-color: white">
                                 <thead>
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Age</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Role</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Delete</th>
-                                    </tr>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="user : ${users}">
-                                        <td th:text="${user.getId()}">Id</td>
-                                        <td th:text="${user.getFirstName()}">FirstName</td>
-                                        <td th:text="${user.getLastName()}">LastName</td>
-                                        <td th:text="${user.getAge()}">Age</td>
-                                        <td th:text="${user.getEmail()}">Email</td>
-                                        <td th:text="${user.getAuthorities().iterator().next().getAuthority()}">Role</td>
-                                        <td><a th:href="@{/admin/user-update/{id}(id=${user.getId()})}">Edit</a></td>
-                                        <td><a th:href="@{/admin/user-delete/{id}(id=${user.getId()})}">Delete</a></td>
-                                    </tr>
+                                <tr th:each="user : ${users}">
+                                    <td th:text="${user.getId()}">Id</td>
+                                    <td th:text="${user.getFirstName()}">FirstName</td>
+                                    <td th:text="${user.getLastName()}">LastName</td>
+                                    <td th:text="${user.getAge()}">Age</td>
+                                    <td th:text="${user.getEmail()}">Email</td>
+                                    <td th:text="${user.getAuthorities().iterator().next().getAuthority()}">Role</td>
+                                    <td>
+                                        <a th:href="@{/admin/user-update/{id}(id=${user.getId()})}">
+                                            Edit
+                                        </a>
+                                    </td>
+                                    <td><a th:href="@{/admin/user-delete/{id}(id=${user.getId()})}">Delete</a></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="tab-pane fade" id="nav-newUser" role="tabpanel" aria-labelledby="nav-newUser-tab">
-                            <h4>Add new user</h4>
-                            <table class="table table-striped" style="background-color: white">
-                                <div class="container">
-                                    <div class="row justify-content-center" style="text-align: center">
-                                        <div class="col-6">
-                                            <div>
-                                                <form th:method="POST"
-                                                      th:action="@{/admin/user-create}"
-                                                      th:object="${user}">
+                            <h5 style="text-align: left">Add new user</h5>
+                            <div class="container" style="background-color: white">
+                                <div class="row justify-content-center" style="text-align: center">
+                                    <div class="col-5">
+                                        <div>
+                                            <form th:action="@{/admin/user-create}"
+                                                  th:object="${user}"
+                                                  method="POST">
 
-                                                    <label class="form-label fw-bold">First name</label>
-                                                    <input class="form-control bg-warning" type="text" th:field="*{firstName}">
+                                                <label for="firstName"><b>First Name</b></label>
+                                                <input th:name="firstName" th:type="text" class="form-control bg-warning" id="firstName" required/>
 
-                                                    <label class="form-label fw-bold">Last name</label>
-                                                    <input class="form-control bg-warning" type="text" th:field="*{lastName}">
+                                                <label for="lastName"><b>Last Name</b></label>
+                                                <input th:name="lastName" th:type="text" class="form-control bg-warning" id="lastName" required/>
 
-                                                    <label class="form-label fw-bold">Age</label>
-                                                    <input class="form-control" type="number" th:field="*{age}">
+                                                <label for="age"><b>Age</b></label>
+                                                <input th:name="age" th:type="number" class="form-control" id="age"/>
 
-                                                    <label class="form-label fw-bold">Email</label>
-                                                    <input class="form-control bg-warning" type="email" th:field="*{email}" required>
+                                                <label for="email"><b>Email</b></label>
+                                                <input th:name="email" th:type="text" class="form-control bg-warning" id="email" required/>
 
-                                                    <label class="form-label fw-bold">Password</label>
-                                                    <input class="form-control" type="password" th:field="*{password}">
+                                                <label for="password"><b>Password</b></label>
+                                                <input th:name="password" th:type="password" class="form-control" id="password" required/>
 
-                                                    <label class="form-label fw-bold">Role</label>
-                                                    <select class="form-select" size="2" name="userRoles" multiple required>
-                                                        <option value="ADMIN">Admin</option>
-                                                        <option value="USER">User</option>
-                                                    </select>
-                                                    <input class="btn btn-success" type="submit" value="Create User">
-                                                </form>
-                                            </div>
+                                                <label class="form-label fw-bold">Role</label>
+                                                <select class="form-select" size="2" name="userRoles" multiple required>
+                                                    <option value="ADMIN">Admin</option>
+                                                    <option value="USER">User</option>
+                                                </select>
+
+                                                <br>
+                                                <button th:type="submit" class="btn btn-success btn-lg" value="Add new user">Add new user
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                            </table>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -127,27 +133,27 @@
                     <table class="table table-striped" style="background-color: white">
                         <h4>About user</h4>
                         <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Age</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Role</th>
-                            </tr>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td th:text="${loggedInUser.getId()}">Id</td>
-                                <td th:text="${loggedInUser.getFirstName()}">FirstName</td>
-                                <td th:text="${loggedInUser.getLastName()}">LastName</td>
-                                <td th:text="${loggedInUser.getAge()}">Age</td>
-                                <td th:text="${loggedInUser.getEmail()}">Email</td>
-                                <td th:each="role, i : ${loggedInUser.getAuthorities()}"
-                                    th:text="${i.first} ? ${role.getRoleName() + ','} : ${role.getRoleName()}">
-                                    Role
-                                </td>
-                            </tr>
+                        <tr>
+                            <td th:text="${loggedInUser.getId()}">Id</td>
+                            <td th:text="${loggedInUser.getFirstName()}">FirstName</td>
+                            <td th:text="${loggedInUser.getLastName()}">LastName</td>
+                            <td th:text="${loggedInUser.getAge()}">Age</td>
+                            <td th:text="${loggedInUser.getEmail()}">Email</td>
+                            <td th:each="role, i : ${loggedInUser.getAuthorities()}"
+                                th:text="${i.first} ? ${role.getRoleName() + ','} : ${role.getRoleName()}">
+                                Role
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
