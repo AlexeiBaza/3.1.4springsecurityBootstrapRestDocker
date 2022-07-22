@@ -28,6 +28,7 @@ public class AdminController {
     @GetMapping(path = "/admin/adminPage")
     public String userList(Model model, Principal principal) {
         model.addAttribute("users", userService.readAll());
+
         model.addAttribute("loggedInUser", (User) ((Authentication) principal).getPrincipal());
         return "user-list.html";
     }

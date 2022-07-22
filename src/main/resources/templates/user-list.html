@@ -79,7 +79,10 @@
                                     <td th:text="${user.getLastName()}">LastName</td>
                                     <td th:text="${user.getAge()}">Age</td>
                                     <td th:text="${user.getEmail()}">Email</td>
-                                    <td th:text="${user.getAuthorities().iterator().next().getAuthority()}">Role</td>
+                                    <td>
+                                        <span th:each="role, i : ${user.roles}"
+                                              th:text="${i.first} ? ${role.getRoleName()+' '} : ${role.getRoleName()}">Role</span>
+                                    </td>
                                     <td>
 <!--                                        Button trigger modal-->
                                         <button style type="button"
@@ -304,9 +307,9 @@
                             <td th:text="${loggedInUser.getLastName()}">LastName</td>
                             <td th:text="${loggedInUser.getAge()}">Age</td>
                             <td th:text="${loggedInUser.getEmail()}">Email</td>
-                            <td th:each="role, i : ${loggedInUser.getAuthorities()}"
-                                th:text="${i.first} ? ${role.getRoleName() + ','} : ${role.getRoleName()}">
-                                Role
+                            <td>
+                                <span th:each="role, i : ${loggedInUser.getAuthorities()}"
+                                      th:text="${i.first} ? ${role.getRoleName()+','} : ${role.getRoleName()}">Role</span>
                             </td>
                         </tr>
                         </tbody>
