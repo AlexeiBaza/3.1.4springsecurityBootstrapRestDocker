@@ -33,7 +33,7 @@ public class UserController {
     @GetMapping("/user/userPage")
     public String getUser(Model model, Principal principal) {
         Optional<User> userOptional = Optional.of((User) ((Authentication) principal).getPrincipal());
-        model.addAttribute("user", userOptional);
+        model.addAttribute("loggedInUser", (User) ((Authentication) principal).getPrincipal());
         return "userPage.html";
     }
 
