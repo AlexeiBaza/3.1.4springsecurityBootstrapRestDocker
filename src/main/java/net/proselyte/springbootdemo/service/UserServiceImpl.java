@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
-//    private final PasswordEncoder passwordEncoder;
+    //    private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
 
     public UserServiceImpl(UserRepository userRepository, RoleService roleService) {
@@ -46,8 +46,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void delete(User user) {
-        userRepository.delete(user);
+    public void delete(long id) {
+        userRepository.deleteById(id);
     }
 
     @Override

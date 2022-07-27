@@ -28,21 +28,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf()
-                    .disable()
+                .disable()
                 .authorizeRequests()
 //                    .antMatchers("user-list.html").hasRole("ADMIN")
 //                    .antMatchers("userPage.html").hasRole("USER")
-                    .antMatchers("/admin/").hasRole("ADMIN")
-                    .antMatchers("/user/").hasRole("USER")
-                    .antMatchers("/").permitAll()
+//                    .antMatchers("/admin/").hasRole("ADMIN")
+//                    .antMatchers("/user/").hasRole("USER")
+                .antMatchers("/**").permitAll()
                 .anyRequest()
-                    .authenticated()
+                .authenticated()
                 .and()
-                    .formLogin().permitAll()
-                    .successHandler(successHandler)
+                .formLogin().permitAll()
+                .successHandler(successHandler)
                 .and()
                 .logout()
-                    .permitAll();
+                .permitAll();
     }
 }
 

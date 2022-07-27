@@ -10,5 +10,5 @@ public interface UserService {
     Optional<User> readById(long id);
     List<User> readAll();
     void update(User user);
-    void delete (User user);
+    void delete (long id);
 }
