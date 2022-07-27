@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping()
+@RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
     private final RoleService roleService;
@@ -25,7 +25,7 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping(path = "/admin/adminPage")
+    @GetMapping(path = "/adminPage")
     public String userList(Model model, Principal principal) {
         model.addAttribute("users", userService.readAll());
 
@@ -33,14 +33,14 @@ public class AdminController {
         return "user-list.html";
     }
 
-    @GetMapping(path = "/admin/user-create")
+    @GetMapping(path = "/user-create")
     public String createUserForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "user-create.html";
     }
 
-    @PostMapping(path = "/admin/user-create")
+    @PostMapping(path = "/user-create")
     public String createUser(@ModelAttribute("user") User user, HttpServletRequest request) {
         user.setFirstName(request.getParameter("firstName"));
         user.setLastName(request.getParameter("lastName"));
@@ -57,26 +57,26 @@ public class AdminController {
         return "redirect:/admin/adminPage";
     }
 
-    @PostMapping (path = "/admin/user-delete/{id}")
+    @PostMapping (path = "/user-delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.delete(userService.readById(id).get());
         return "redirect:/admin/adminPage";
     }
 
-    @GetMapping(path = "/admin/user-show/{id}")
+    @GetMapping(path = "/user-show/{id}")
     public String userShow(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.readById(id));
         return "show-user.html";
     }
 
-    @GetMapping(path = "/admin/user-update/{id}")
+    @GetMapping(path = "/user-update/{id}")
     public String updateUserForm(@PathVariable("id") Long id, Model model) {
         User user = userService.readById(id).get();
         model.addAttribute("user", user);
         return "user-update.html";
     }
 
-    @PostMapping(path = "/admin/user-update/{id}")
+    @PostMapping(path = "/user-update/{id}")
     public String updateUser(@ModelAttribute("user") User user,
                              @PathVariable("id") long id,
                              HttpServletRequest request) {
