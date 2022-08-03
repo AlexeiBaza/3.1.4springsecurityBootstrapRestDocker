@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
+//логику обработки клиентских запросов на эндпоинты (URI).
 @RestController
 /* @ResponseBody - значит что возвращаемое значение будет в теле веб-ответа.
 @RestController помечен@ResponseBody.
 @RestController* можно заменить на @Controller + @ResponseBody
 Response and request можно управлеть в GetMapping аннотации. */
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/admin")
 public class UserRestController {
 
     private final UserService userService;
@@ -26,10 +26,12 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE)//"MediaType" by default
+    @GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE)//В REST-контроллерах спринга все POJO объекты, а также коллекции POJO объектов, которые возвращаются в качестве тел ответов, автоматически сериализуются в JSON, если явно не указано иное
     public ResponseEntity<List<User>> readAll() {
         List<User> userList = userService.readAll();
-        return new ResponseEntity<>(userList, HttpStatus.OK);
+        return userList != null && !userList.isEmpty()
+                ? new ResponseEntity<>(userList, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping(path = "/users/{id}")
@@ -42,11 +44,10 @@ public class UserRestController {
         }
     }
 
-    //    В теле запроса НЕ должен содержаться id чтобы произвести создание юзера
     @PostMapping(path = "/users")
     /* @RequestBody т.к отправляем юзера не из формы Model, а используя JSON.
     Поэтому данные придут в теле запроса*/
-    public ResponseEntity<Void> createUser(@RequestBody User user) {
+    public ResponseEntity<?> createUser(@RequestBody User user) {
         userService.create(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

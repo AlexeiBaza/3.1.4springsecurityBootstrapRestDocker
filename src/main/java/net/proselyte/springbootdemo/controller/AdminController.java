@@ -30,7 +30,7 @@ public class AdminController {
         model.addAttribute("users", userService.readAll());
 
         model.addAttribute("loggedInUser", (User) ((Authentication) principal).getPrincipal());
-        return "user-list.html";
+        return "index.html";
     }
 
     @GetMapping(path = "/user-create")
