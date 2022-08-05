@@ -1,7 +1,7 @@
 //атрибут async для функции всегда возращает promise
 //await можно использовать только внутри async-функций. await заставит интерпретатор
 // JavaScript ждать до тех пор, пока промис справа от await не выполнится.
-const userService = {//объект userService
+const main = {//объект userService
     create: async (user) => await fetch('http://localhost:8080/api/v1/admin/users',
         {
             "method": "POST",

@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
-    //    private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
 
     public UserServiceImpl(UserRepository userRepository, RoleService roleService) {
@@ -32,6 +31,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void update(User user) {
+        if (user.getPassword().isEmpty()) {
+            user.setPassword(userRepository.findById(user.getId()).get().getPassword());;
+        } else {
+            user.setPassword(user.getPassword());
+        }
+        if (!user.getRoles().isEmpty()) {
+            user.setRoles(user.getRoles().stream()
+                    .map(role ->roleService.findByRoleName(role.getRoleName()).get())
+                    .collect(Collectors.toList()));
+        } else {
+            user.setRoles(userRepository.findById(user.getId()).get().getRoles());
+        }
         userRepository.save(user);
     }
 

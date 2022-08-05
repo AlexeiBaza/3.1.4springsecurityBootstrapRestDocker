@@ -11,29 +11,25 @@ import org.springframework.context.event.EventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class SpringbootdemoApplication {
 
-	@Autowired
-	UserRepository userRepository;
-//	@Autowired
-//	PasswordEncoder passwordEncoder;
+	private final UserRepository userRepository;
+
+	public SpringbootdemoApplication(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootdemoApplication.class, args);
 	}
 
-//	@EventListener(ApplicationReadyEvent.class)
-//	public void test() {
-//		List<Role> roles1 = new ArrayList<>();
-//		roles1.add(new Role(3L, "admin"));
-//		roles1.add(new Role(3L, "user"));
-//		User user = new User(3L, "p", "p", 100, "p", "p", roles1);
-////		user.setPassword(passwordEncoder.encode(user.getPassword()));
-//		user.setPassword(user.getPassword());
-////		String user = userRepository.findByEmail("admin").toString();
-//		System.out.println(userRepository.findById(1L).get().getAuthorities().iterator().next().getAuthority());
-//	}
+	@EventListener(ApplicationReadyEvent.class)
+	public void test() {
+		Optional<User> user1 = userRepository.findById(1L);
+		user1.get().getRoles().forEach(System.out::println);
+	}
 
 }
