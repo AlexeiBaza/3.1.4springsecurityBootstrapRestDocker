@@ -1,13 +1,12 @@
-alert('start application')
 $(document).ready(fillTable);
-async function fillTable() {
-    $("#users_table_js  tbody").empty();
-    let usersList = await main.readAll().then(response => response.json());
+async function fillTable() {//async - функция всегда возвращает промисс
+    $("#users_table_js tbody").empty();
+    let usersList = await main.readAll().then(response => response.json());//результат промиса вызовется в функция "then" onFulfilled  которой выполниться при resolve
     let rows='';
     for (let user of usersList) {
         let userRoles = '';
         for (let role of user.roles) {
-            userRoles += role.roleName.slice(5) +', '
+            userRoles += role.roleName +', '
         }
         userRoles = userRoles.slice(0, -2);
 

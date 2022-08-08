@@ -39,26 +39,38 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-2 vh-100" style="background-color: #ffffff">
-                <div class="nav flex-column nav-pills me-3">
-                    <br>
-                    <a class="nav-link active" data-bs-toggle="pill" href="#pills-admin">
-                        Admin
-                    </a>
-                    <a class="nav-link" data-bs-toggle="pill" href="#pills-user">
-                        User
-                    </a>
-                </div>
+                <ul class="d-grid gap-2 nav nav-pills nav-fill">
+                    <li class="nav-item admin" style="background-color: #ffffff">
+                        <br>
+                        <button class="btn btn-primary nav-link active" data-bs-toggle="pill" data-bs-target="#pills-admin" style="text-align: left">
+                            Admin
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary nav-link" id="user-button" data-bs-toggle="pill" data-bs-target="#pills-user" style="text-align: left">
+                            User
+                        </button>
+                    </li>
+                </ul>
             </div>
 
             <div class="col-10 vh-100" style="background-color: #e8e8e8">
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="pills-admin">
+                    <div class="tab-pane fade show active admin" id="pills-admin">
                         <br>
                         <h1>Admin panel</h1>
-                        <nav class="nav nav-tabs">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#usersTable">Users table</a>
-                            <a class="nav-link" data-bs-toggle="tab" href="#newUser">New User</a>
-                        </nav>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#usersTable">
+                                    Users table
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#newUser">
+                                    New User
+                                </a>
+                            </li>
+                        </ul>
 
                         <div class="tab-content">
                             <div class="tab-pane fade show active align-items-center" id="usersTable">
@@ -121,7 +133,7 @@
 
                     <div class="tab-pane fade show" id="pills-user">
                         <h2>User information-page</h2>
-                        <table class="table table-striped" style="background-color: white" id="auth_user_table">
+                        <table class="table table-striped" style="background-color: white" id="auth_user_table_js">
                             <caption class="caption-top fw-bold" style="color:black "><h5>About user</h5></caption>
                             <thead>
                             <tr>
@@ -144,5 +156,6 @@
 
 <script src="/js/main.js"></script>
 <script src="/js/fillTable.js"></script>
+<script src="/js/authUser.js"></script>
 </body>
 </html>

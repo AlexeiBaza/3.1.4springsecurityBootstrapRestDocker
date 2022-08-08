@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -63,5 +64,11 @@ public class UserRestController {
     public ResponseEntity<Void> deleteUser(@PathVariable("id") long id) {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(path = "/user")
+    public ResponseEntity<User> getAuth() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity<>(userService.readById(user.getId()).get(), HttpStatus.OK);
     }
 }

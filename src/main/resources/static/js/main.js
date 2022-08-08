@@ -11,7 +11,7 @@ const main = {//объект userService
             "body": JSON.stringify(user)//stringify преобразует объект Java или JavaScript в строку
         }),
 
-    readAuth: async () => await fetch("http://localhost:8080/user",
+    readAuth: async () => await fetch("http://localhost:8080/api/v1/admin/user",
         {
             "method": "GET",
             "headers": {"Accept": "application/json"},

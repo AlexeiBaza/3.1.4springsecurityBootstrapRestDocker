@@ -1,17 +1,15 @@
-//Функция getAuthUser исполниться тогда когда документ будет готов (браузер получит весь ее контент - все теги)
 $(document).ready(getAuthUser());
-
 async function getAuthUser() {
-    let authUser = await userService.readAuth().then(response => response.json());
+    let authUser = await main.readAuth().then(response => response.json());
 
     let authUserRoles = '';
     for (let role of authUser.roles) {
-        authUserRoles += role.roleName.slice(5) +', '
+        authUserRoles += role.roleName +', '
     }
     authUserRoles = authUserRoles.slice(0, -2);
 
-    if (typeof authUser.roles.find(role => role.roleName === "ROLE_Admin") != "undefined") {
-        $(".admin").show();
+    if (typeof authUser.roles.find(role => role.roleName === "ADMIN") != "undefined") {
+        $(".adminPanel").show();
     } else {
         $("#pills-user").addClass("active")
         $("#user-button").addClass("active")
@@ -28,5 +26,5 @@ async function getAuthUser() {
                     <td>${authUser.email}</td>
                     <td> ${authUserRoles}</td>
                </tr>`;
-    $('#auth_user_table').children('tbody').append(row);
+    $('#auth_user_table_js').children('tbody').append(row);
 }
