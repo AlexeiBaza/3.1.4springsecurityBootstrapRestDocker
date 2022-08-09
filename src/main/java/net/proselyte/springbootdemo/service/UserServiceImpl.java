@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
-
     private final UserRepository userRepository;
     private final RoleService roleService;
 
@@ -26,6 +25,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void create(User user) {
         user.setPassword(user.getPassword());
+        user.setRoles(user.getRoles()
+                .stream()
+                .map(role -> roleService.findByRoleName(role.getRoleName()).get())
+                .collect(Collectors.toList()));
         userRepository.save(user);
     }
 

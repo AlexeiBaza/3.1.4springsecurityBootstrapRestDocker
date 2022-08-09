@@ -13,8 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_role",
         uniqueConstraints = {
-                @UniqueConstraint(name = "role_name_unique",
-                        columnNames = "role_name")
+                @UniqueConstraint(name = "role_name_unique", columnNames = "role_name")
         })
 public class Role implements GrantedAuthority {
 
@@ -24,9 +23,11 @@ public class Role implements GrantedAuthority {
             updatable = false)
     private long id;
 
+
     @Column(name = "role_name",
             nullable = false)
     private String roleName;
+
 
     public Role(String roleName) {
         this.roleName = roleName;
@@ -35,5 +36,10 @@ public class Role implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return roleName;
+    }
+
+    @Override
+    public String toString() {
+        return this.roleName;
     }
 }
