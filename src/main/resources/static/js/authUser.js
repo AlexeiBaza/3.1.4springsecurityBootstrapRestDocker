@@ -10,14 +10,10 @@ async function getAuthUser() {
 
     if (typeof authUser.roles.find(role => role.roleName === "ADMIN") != "undefined") {
         $(".admin").show();
-        // $("#adminTable").addClass("show active");
-        // $("#adminTab").addClass("show active");
     } else {
         $(".admin").hide();
         $("#userTable").addClass("active")
         $("#userTab").addClass("active")
-        // $("#userTable").addClass("show active");
-        // $("#userTab").addClass("show active");
     }
 
 

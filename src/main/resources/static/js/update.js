@@ -32,7 +32,7 @@ async function getModalEdit(id) {
                                                 <input class="form-control" id="editUserPassword">
                                                 
                                                 <label class="form-label text-center fw-bold">Role</label>
-                                                <select class="form-control" id="editUserRoles" multiple size=2>
+                                                <select class="form-control" id="editUserRoles" multiple size=2 style="background-color: white">
                                                     <option value="ADMIN">ADMIN</option>
                                                     <option value="USER">USER</option>
                                                 </select>
