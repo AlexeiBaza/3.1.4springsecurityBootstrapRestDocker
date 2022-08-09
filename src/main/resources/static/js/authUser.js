@@ -9,11 +9,17 @@ async function getAuthUser() {
     authUserRoles = authUserRoles.slice(0, -2);
 
     if (typeof authUser.roles.find(role => role.roleName === "ADMIN") != "undefined") {
-        $(".adminPanel").show();
+        $(".admin").show();
+        // $("#adminTable").addClass("show active");
+        // $("#adminTab").addClass("show active");
     } else {
-        $("#pills-user").addClass("active")
-        $("#user-button").addClass("active")
+        $(".admin").hide();
+        $("#userTable").addClass("active")
+        $("#userTab").addClass("active")
+        // $("#userTable").addClass("show active");
+        // $("#userTab").addClass("show active");
     }
+
 
     document.getElementById("authUserEmail").innerHTML = authUser.email;
     document.getElementById("authUserRoles").innerHTML = authUserRoles;
