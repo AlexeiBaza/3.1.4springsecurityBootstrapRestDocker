@@ -77,6 +77,15 @@ public class User implements UserDetails {
         return true;
     }
 
+    public User(String firstName, String lastName, Integer age, String email, String password, List<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

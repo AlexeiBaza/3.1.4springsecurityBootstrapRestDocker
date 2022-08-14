@@ -32,7 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/api/v1/admin/").hasRole("ADMIN")
                     .antMatchers("/api/v1/admin/user/").hasRole("USER")
-                .anyRequest().authenticated()
+                //отключено чтобы получить доступ к консоли базы данных по адресу http://localhost:8080/h2-console
+                .anyRequest().authenticated()//
                 .and()
                     .formLogin().permitAll()
                 .successHandler(successHandler)
