@@ -15,7 +15,7 @@ import java.util.Optional;
 //логику обработки клиентских запросов на эндпоинты (URI).
 @RestController
 /* @ResponseBody - значит что возвращаемое значение будет в теле веб-ответа.
-@RestController помечен@ResponseBody.
+@RestController помечен @ResponseBody.
 @RestController* можно заменить на @Controller + @ResponseBody
 Response and request можно управлеть в GetMapping аннотации. */
 @RequestMapping("/api/v1/admin")
