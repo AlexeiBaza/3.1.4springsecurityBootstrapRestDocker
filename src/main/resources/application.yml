@@ -1,17 +1,17 @@
-#JPA
-spring:
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    generate-ddl: false
-  mvc:
-    view:
-      prefix: /templates
-      suffix: .html
-  jackson:
-    serialization:
-      fail-on-empty-beans: false
+##JPA
+#spring:
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#    generate-ddl: false
+#  mvc:
+#    view:
+#      prefix: /templates
+#      suffix: .html
+#  jackson:
+#    serialization:
+#      fail-on-empty-beans: false
 
 #H2
 #  h2:
@@ -25,16 +25,26 @@ spring:
 #server:
 #  port: 8080
 
-## my local postgres db
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/postgres
-#    driver-class-name: org.postgresql.Driver
-#    username: postgres
-#    password: XABP123890
+
 
 #db for docker
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://db:5432/postgres
+#    driver-class-name: org.postgresql.Driver
+#    username: postgres
+#    password: postgres
+#
+#server:
+#  port: ${PORT:8080}
+
+# my local postgres db
+spring:
   datasource:
     url: jdbc:postgresql://db:5432/postgres
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
