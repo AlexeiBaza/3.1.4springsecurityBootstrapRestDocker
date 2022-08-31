@@ -25,29 +25,29 @@ public class SpringBootDemoApplication {
 		SpringApplication.run(SpringBootDemoApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner run(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
-		return args -> {
-			Role roleAdmin = new Role("ADMIN");
-			Role roleUser = new Role("USER");
-
-			User admin1 = new User("admin1", "admin1", 111, "admin1@mail", "admin1", Arrays.asList(roleAdmin, roleUser));
-			User admin2 = new User("admin2", "admin2", 222, "admin2@mail", "admin2", Collections.singletonList(roleAdmin));
-			User user1 = new User("user1", "user1", 11, "user1@mail", "user1", Collections.singletonList(roleUser));
-			User user2 = new User("user2", "user2", 22, "user2@mail", "user2", Collections.singletonList(roleUser));
-			User user3 = new User("user3", "user3", 33, "user3@mail", "user3", Collections.singletonList(roleUser));
-
-//			For H2 database
-//			roleService.create(roleAdmin);
-//			roleService.create(roleUser);
-
-			userService.create(admin1);
-			userService.create(admin2);
-			userService.create(user1);
-			userService.create(user2);
-			userService.create(user3);
-		};
-	}
+//	@Bean
+//	CommandLineRunner run(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
+//		return args -> {
+//			Role roleAdmin = new Role("ADMIN");
+//			Role roleUser = new Role("USER");
+//
+//			User admin1 = new User("admin1", "admin1", 111, "admin1@mail", "admin1", Arrays.asList(roleAdmin, roleUser));
+//			User admin2 = new User("admin2", "admin2", 222, "admin2@mail", "admin2", Collections.singletonList(roleAdmin));
+//			User user1 = new User("user1", "user1", 11, "user1@mail", "user1", Collections.singletonList(roleUser));
+//			User user2 = new User("user2", "user2", 22, "user2@mail", "user2", Collections.singletonList(roleUser));
+//			User user3 = new User("user3", "user3", 33, "user3@mail", "user3", Collections.singletonList(roleUser));
+//
+////			For H2 database
+////			roleService.create(roleAdmin);
+////			roleService.create(roleUser);
+//
+//			userService.create(admin1);
+//			userService.create(admin2);
+//			userService.create(user1);
+//			userService.create(user2);
+//			userService.create(user3);
+//		};
+//	}
 
 //	@EventListener(ApplicationReadyEvent.class)
 //	public void test() {

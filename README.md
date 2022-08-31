@@ -1,3 +1,3 @@
 ## Java pre-project. Задача 3.1.5
 Практическая задача
-Задание:
+Задание: Spring boot + JS + Postgres + Docker
