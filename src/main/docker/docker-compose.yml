@@ -31,7 +31,7 @@ services:
     ports:
       - "5000:5432"
     volumes:
-      - "db-data:/var/lib/postgresql/data"
+      - "db-data:/app/postgresql/data"
 
   js:
     image: 'js_image:latest'
